@@ -1,0 +1,8 @@
+requests
+psutil
+pytest
+pytest-mock
+setuptools
+coverage
+
+-e sevensense_device
