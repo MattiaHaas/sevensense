@@ -18,7 +18,7 @@ INTERNET_CONNECTION_CHECK_URL = "https://www.google.com"
 
 # Set up the logger
 logger = logging.getLogger("DeviceLogger")
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 # Create a console handler with timestamped log format
 ch = logging.StreamHandler()
@@ -296,7 +296,7 @@ class Device:
             bool: True if the installation completed successfully, False if it failed.
         """
 
-        # Double check if we are indeed in the idle state
+        # Double check if we are indeed in the download state
         if self.state != DeviceState.Downloading:
             return False
 
@@ -309,8 +309,8 @@ class Device:
             self.state = DeviceState.Upgrading
 
         # Set up the process for installing the image
-        command = ["sh", "install.sh"]
-        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        command = "chmod +x install.sh && ./install.sh"
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
 
         start_time = time.time()
 
