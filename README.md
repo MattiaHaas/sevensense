@@ -2,11 +2,9 @@
 
 ## Install
 
-This code has been run locally on my macos machine using Python 3.12.
+This code has been run inside a Ubuntu docker container using Python 3.12.
 To replicate my setup one can perform the following instructions:
-1. Create virtual environment: `python -m venv venv`
-2. Source virtual environment: `source venv/bin/activate`
-3. Install required packages: `pip install -r requirements.txt`
+1. Create docker image: `docker build -t sevensense .`
 
 ## Method
 
@@ -35,7 +33,7 @@ used to investigate any past updates later on.
 ## Testing
 
 To run the tests including coverage one can run the following command:
-`DUT=A INITIAL_VERSION=2 coverage run -m pytest tests -v && coverage report -m`
+`docker run -it sevensense`
 
 The tests mostly reflect the requirements. The additionally challenge for the timeout
 interruption tests was to mock/simulate a difference response from the device object.
@@ -57,5 +55,4 @@ but also to simulate the time passing faster than expected.
 * The command for the installation is just running a dummy script.
 * Adapt the code to the available interfaces for the power supply check.
 * Expand the test cases to achieve a coverage of 100%.
-* Run the tests in a docker container with the correct ubuntu environment.
 * Add a variable which indicates whether or not an update is currently running or consolidate the updating states.
